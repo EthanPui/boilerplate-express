@@ -1,17 +1,30 @@
+var bodyParser = require('body-parser');
+
 let express = require('express');
 let app = express();
 
 const middleware = function(req, res, next){
-  // Call next function in line:
-  var string = req.method + " " + req.path + " - " + req.ip;
-  console.log(string);
-  req.time = new Date().toString();
+  return req.body;
   next();
-};
+}
 
-app.get("/now", middleware, function(req, res){
-  res.send({ time: req.time});
-});
+// app.route(path).get(handler).post(handler);
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+
+// const middleware = function(req, res, next){
+//   // Call next function in line:
+//   var string = req.method + " " + req.path + " - " + req.ip;
+//   console.log(string);
+//   req.time = new Date().toString();
+//   next();
+// };
+
+// app.get("/now", middleware, function(req, res){
+//   res.send({ time: req.time});
+// });
 
 absolutePath = __dirname + "/views/index.html";
 
@@ -45,7 +58,7 @@ app.get("/name", function(req, res) {
   });
 });
 
-// app.route(path).get(handler).post(handler)
+
 
 
 
