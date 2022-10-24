@@ -32,10 +32,30 @@ app.get("/json", function(req, res){
   }
 });
 
+app.get("/:word/echo", function(req,res){
+  var word = req.params.word;
+  res.send({echo: word})
+});
+
+app.get("/name", function(req, res) {
+  var firstName = req.query.first;
+  var lastName = req.query.last;
+  res.json({
+    name: `${firstName} ${lastName}`
+  });
+});
+
+// app.route(path).get(handler).post(handler)
 
 
 
-// console.log("Hello world!");
+
+
+
+
+
+
+
 
 
 
