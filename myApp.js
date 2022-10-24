@@ -1,6 +1,18 @@
 let express = require('express');
 let app = express();
 
+const middleware = function(req, res, next){
+  // Call next function in line:
+  var string = req.method + " " + req.path + " - " + req.ip;
+  console.log(string);
+  req.time = new Date().toString();
+  next();
+};
+
+app.get("/now", middleware, function(req, res){
+  res.send({ time: req.time});
+});
+
 absolutePath = __dirname + "/views/index.html";
 
 app.get("/" ,function(req, res){
@@ -24,38 +36,6 @@ app.get("/json", function(req, res){
 
 
 // console.log("Hello world!");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
